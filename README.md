@@ -19,3 +19,8 @@ Learning how to use uv and Django.
 8. Ran: `uv run python manage.py startapp core` - `startapp` creates a new application within your Django project.
 
 - An app is a self-contained module that handles a specific functionality of your website.
+
+9. To make migrations: `uv run python manage.py makemigrations`
+10. Create a superuser: `uv run python manage.py createsuperuser`
+11. You can now run the server: `uv run python manage.py runserver`
+12. Go to http://127.0.0.1:8000/admin/ to see the admin interface.
