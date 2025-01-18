@@ -21,6 +21,7 @@ Learning how to use uv and Django.
 - An app is a self-contained module that handles a specific functionality of your website.
 
 9. To make migrations: `uv run python manage.py makemigrations`
-10. Create a superuser: `uv run python manage.py createsuperuser`
-11. You can now run the server: `uv run python manage.py runserver`
-12. Go to http://127.0.0.1:8000/admin/ to see the admin interface.
+10. To migrate: `uv run python manage.py migrate`
+11. Create a superuser: `uv run python manage.py createsuperuser`
+12. You can now run the server: `uv run python manage.py runserver`
+13. Go to http://127.0.0.1:8000/admin/ to see the admin interface.
