@@ -1,0 +1,9 @@
+[project]
+name = "todo_django"
+version = "0.1.0"
+description = "A todo app based on https://dev.to/rodbv/creating-a-to-do-app-with-django-and-htmx"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.1.5",
+]
