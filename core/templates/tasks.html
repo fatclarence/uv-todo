@@ -1,14 +1,35 @@
 <!-- core/templates/tasks.html -->
 
-{% extends "_base.html" %} {% block content %}
+{% extends "_base.html" %} {% load partials %} {% block content %}
 <div class="flex flex-col items-center mx-10 md:mx-20">
   <h1 class="text-2xl font-bold m-4">{{ fullname }}'s Tasks</h1>
   <div class="w-full max-w-2xl">
-    <ul class="list bg-base-100 rounded-box shadow-md">
-      {% for todo in todos %}
+
+    <div class="mb-4"></div>
+      <form hx-post="{% url 'tasks' %}" 
+        hx-swap="beforeend" 
+        hx-target="#todo-items" 
+        hx-on::after-request="this.reset()"
+        hx-disable-elt="#submit"
+        class="flex items-center space-x-2">
+        <input type="text" required name="title" placeholder="Add a new todo" class="input input-bordered flex-1 text-lg" />
+        <button type="submit" class="btn btn-primary btn-info text-lg w-24">Add</button>
+      </form>
+    </div>
+
+    <ul id="todo-items" class="list bg-base-100 rounded-box shadow-md">
+      <!-- The two attributes added are important: -->
+      <!-- the name of the partial, todo-item-partial, -->
+      <!-- will be used to refer to it in our view and other templates, -->
+      <!-- and the inline attribute indicates that we want to keep rendering the partial within the context of its parent template. -->
+      {% for todo in todos %} {% partialdef todo-item-partial inline %}
       <li class="list-row">
         <input
           type="checkbox"
+          hx-put="{% url 'toggle_todo' todo.id %}"
+          hx-target="closest li"
+          hx-on:click="this.setAttribute('disabled', 'disabled')"
+          hx-swap="outerHTML"
           {%
           if
           todo.is_completed
@@ -17,12 +38,13 @@
           %}
           class="checkbox checkbox-lg checkbox-info mr-4"
         />
+
         <span
           class="flex-1 text-lg {% if todo.is_completed %}text-gray-500{% endif %}"
           >{{ todo.title }}</span
         >
       </li>
-      {% endfor %}
+      {% endpartialdef %} {% endfor %}
     </ul>
   </div>
 </div>
