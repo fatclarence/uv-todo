@@ -7,6 +7,7 @@ from model_bakery import baker
 # that gives you access to the active User model in your Django project.
 # 
 # The django_user_model value is "captured" at fixture creation time
+# Creates a new instance each time with different params
 @pytest.fixture
 def make_user(django_user_model):
   def _make_user(**kwargs):
